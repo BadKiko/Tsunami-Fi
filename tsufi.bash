@@ -43,7 +43,7 @@ fi
 while true
 do
 clear
-printf '\e[8;21;53t'
+printf '\e[8;25;57t'
 printf "\x1b[1;33m-----# \x1b[1;32mДобро пожаловать в Tsu-Fi \x1b[1;33m#-----\x1b[0m"
 printf "\x1b[1;33m\n\nВыберите Wi-Fi адаптер:\n\n\x1b[0m"
 idname=(null)
@@ -73,10 +73,13 @@ done
 
 wificard=${idname[$adapchoose]}
 
+autoffnm="1"
+
 #Вывод в консоль информации
 while true
 do
 clear
+printf '\e[8;25;57t'
 iwm=$(iwconfig $wificard | grep Mode)
 wifimode=$(echo $iwm | cut -d: -f 2 | cut -d ' ' -f 1)
 echo -e  "\x1b[1;33m* \x1b[1;32mВы выбрали интерфейс: \x1b[1;33m$wificard | Режим: $wifimode\x1b[0m"
@@ -86,8 +89,9 @@ fi
 if [[ "$(iptables -t nat -L PREROUTING | grep REDIRECT | cut -d ' ' -f 1,35,36,37,38)" != "" ]]; then
 echo -e "\x1b[1;33m* \x1b[1;32m$(iptables -t nat -L PREROUTING | grep REDIRECT | cut -d ' ' -f 1,35,36,37,38)\x1b[0m"
 fi
-
-
+if [[ $autoffnm == "1" ]]; then
+echo -e  "\x1b[1;33m* \x1b[1;32mОтключение NetworkManager перед выполнением комманд\x1b[0m"
+fi
 
 echo -e  "\x1b[1;33m\n0)\x1b[1;32m Выйти из скрипта.\x1b[0m"
 echo -e "\x1b[1;33m---------------------------------------------"
@@ -111,6 +115,18 @@ echo -e  "\x1b[1;33m3)\x1b[1;32m Выключить IP-Forwarding.\x1b[0m"
 fi
 echo -e  "\x1b[1;33m4)\x1b[1;32m Redirect портов.\x1b[0m"
 echo -e  "\x1b[1;33m5)\x1b[1;32m Запустить Ettercap.\x1b[0m"
+echo -e  "\x1b[1;33m6)\x1b[1;32m Запустить BurpSuite\x1b[0m"
+
+echo -e "\x1b[1;33m---------------------------------------------"
+echo -e "\x1b[1;33m<WPS Attack>"
+echo -e "\x1b[1;33m---------------------------------------------"
+if [[ $autoffnm == "1" ]]; then
+echo -e  "\x1b[1;33m7)\x1b[1;32m Отключить авто отключение NetworkManager'a.\x1b[0m"
+else
+echo -e  "\x1b[1;33m7)\x1b[1;32m Включить авто отключение NetworkManager'a.\x1b[0m"
+fi
+echo -e  "\x1b[1;33m8)\x1b[1;32m Запуск OneShot.\x1b[0m"
+echo -e  "\x1b[1;33m9)\x1b[1;32m Запуск WPS-Only WiFite\x1b[0m"
 
 printf "\x1b[1;32m\nTSU-FI> \x1b[1;33m"
 read choose
@@ -274,5 +290,71 @@ done
 5)
 ettercap -G &
 sleep 0.1
+;;
+6)
+burpsuite &
+sleep 0.1
+;;
+7)
+if [[ $autoffnm == "1" ]]; then
+autoffnm="0"
+else
+autoffnm="1"
+fi
+;;
+8)
+clear
+printf '\e[8;33;130t'
+
+if [[ $autoffnm == "1" ]]; then
+echo -e "\x1b[1;33mОтключаем NetworkManager"
+systemctl stop NetworkManager
+systemctl stop wpa_supplicant
+echo -e "\x1b[1;33mУбиваем мешающие сервисы"
+airmon-ng check kill
+
+sleep 0.5
+fi
+
+clear
+touch OneShot/tmp_log.txt
+python3 -u OneShot/oneshot.py -i $wificard | tee OneShot/tmp_log.txt
+clear
+
+echo -e "\x1b[1;33m$(tail -1 OneShot/tmp_log.txt)"
+echo -e "\x1b[1;33mНажмите [Enter] чтобы вернуться в меню"
+rm OneShot/tmp_log.txt
+read
+clear
+if [[ $autoffnm == "1" ]]; then
+systemctl start NetworkManager
+systemctl start wpa_supplicant
+fi
+;;
+9)
+clear
+printf '\e[8;33;130t'
+
+if [[ $autoffnm == "1" ]]; then
+echo -e "\x1b[1;33mОтключаем NetworkManager"
+systemctl stop NetworkManager
+systemctl stop wpa_supplicant
+echo -e "\x1b[1;33mУбиваем мешающие сервисы"
+airmon-ng check kill
+
+sleep 0.5
+fi
+
+clear
+wifite --wps-only -i $wificard
+
+echo -e "\x1b[1;33mНажмите [Enter] чтобы вернуться в меню"
+
+read
+clear
+if [[ $autoffnm == "1" ]]; then
+systemctl start NetworkManager
+systemctl start wpa_supplicant
+fi
 esac
 done
