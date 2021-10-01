@@ -104,29 +104,30 @@ fi
 if [[ $wifimode == "Monitor" ]]; then
 echo -e  "\x1b[1;33m2)\x1b[1;32m Перевести интерфейс в управляемый режим.\x1b[0m"
 fi
+echo -e  "\x1b[1;33m3)\x1b[1;32m Выбрать сеть.\x1b[0m"
 echo -e "\x1b[1;33m---------------------------------------------"
 echo -e "\x1b[1;33m<MITM>"
 echo -e "\x1b[1;33m---------------------------------------------"
 if [[ "$(sysctl net.ipv4.ip_forward)" == "net.ipv4.ip_forward = 0" ]]; then
-echo -e  "\x1b[1;33m3)\x1b[1;32m Включить IP-Forwarding.\x1b[0m"
+echo -e  "\x1b[1;33m4)\x1b[1;32m Включить IP-Forwarding.\x1b[0m"
 fi
 if [[ "$(sysctl net.ipv4.ip_forward)" == "net.ipv4.ip_forward = 1" ]]; then
-echo -e  "\x1b[1;33m3)\x1b[1;32m Выключить IP-Forwarding.\x1b[0m"
+echo -e  "\x1b[1;33m4)\x1b[1;32m Выключить IP-Forwarding.\x1b[0m"
 fi
-echo -e  "\x1b[1;33m4)\x1b[1;32m Redirect портов.\x1b[0m"
-echo -e  "\x1b[1;33m5)\x1b[1;32m Запустить Ettercap.\x1b[0m"
-echo -e  "\x1b[1;33m6)\x1b[1;32m Запустить BurpSuite\x1b[0m"
+echo -e  "\x1b[1;33m5)\x1b[1;32m Redirect портов.\x1b[0m"
+echo -e  "\x1b[1;33m6)\x1b[1;32m Запустить Ettercap.\x1b[0m"
+echo -e  "\x1b[1;33m7)\x1b[1;32m Запустить BurpSuite\x1b[0m"
 
 echo -e "\x1b[1;33m---------------------------------------------"
 echo -e "\x1b[1;33m<WPS Attack>"
 echo -e "\x1b[1;33m---------------------------------------------"
 if [[ $autoffnm == "1" ]]; then
-echo -e  "\x1b[1;33m7)\x1b[1;32m Отключить авто отключение NetworkManager'a.\x1b[0m"
+echo -e  "\x1b[1;33m8)\x1b[1;32m Отключить авто отключение NetworkManager'a.\x1b[0m"
 else
-echo -e  "\x1b[1;33m7)\x1b[1;32m Включить авто отключение NetworkManager'a.\x1b[0m"
+echo -e  "\x1b[1;33m8)\x1b[1;32m Включить авто отключение NetworkManager'a.\x1b[0m"
 fi
-echo -e  "\x1b[1;33m8)\x1b[1;32m Запуск OneShot.\x1b[0m"
-echo -e  "\x1b[1;33m9)\x1b[1;32m Запуск WPS-Only WiFite\x1b[0m"
+echo -e  "\x1b[1;33m9)\x1b[1;32m Запуск OneShot.\x1b[0m"
+echo -e  "\x1b[1;33m10)\x1b[1;32m Запуск WPS-Only WiFite\x1b[0m"
 
 printf "\x1b[1;32m\nTSU-FI> \x1b[1;33m"
 read choose
@@ -194,7 +195,24 @@ airmon-ng check kill
 sleep 1
 fi
 ;;
-3)#Ip-Forwarding
+3)#Take inet
+clear
+printf '\e[8;33;110t'
+sudo iw dev $wificard scan | awk '
+    BEGIN{print "\r\nMAC\t\t\tSignal\tESSID\t\t\t\tChannel\tWPS\t\tManufacturer\tModel\tModel Number\tDevice name"}
+    /BSS [a-z0-9:]{10}/{print ""; printf substr($2,1,17)}
+    /signal: /{printf "\t"$2"\t"}
+    /SSID: /{system("echo \""$2"\"............................. | cut -c -25 | head -c -1")}
+    /DS Parameter set/{printf"\t"$5}
+    /Protected/{printf "\t"$6$7}
+    /Manufacturer/{printf "\t"$3}
+    /Model:/{printf "\t\t"$3}
+    /Model Number:/{printf "\t"$4}
+    /Device name:/{printf "\t\t"$4$5}';
+echo
+read
+;;
+4)#Ip-Forwarding
 if [[ "$(sysctl net.ipv4.ip_forward)" == "net.ipv4.ip_forward = 0" ]]; then
 sysctl -w net.ipv4.ip_forward=1
 continue
@@ -204,7 +222,7 @@ sysctl -w net.ipv4.ip_forward=0
 continue
 fi
 ;;
-4)
+5)
 while true
 do
 clear
@@ -287,22 +305,22 @@ done
 esac
 done
 ;;
-5)
+6)
 ettercap -G &
 sleep 0.1
 ;;
-6)
+7)
 burpsuite &
 sleep 0.1
 ;;
-7)
+8)
 if [[ $autoffnm == "1" ]]; then
 autoffnm="0"
 else
 autoffnm="1"
 fi
 ;;
-8)
+9)
 clear
 printf '\e[8;33;130t'
 
@@ -331,7 +349,7 @@ systemctl start NetworkManager
 systemctl start wpa_supplicant
 fi
 ;;
-9)
+10)
 clear
 printf '\e[8;33;130t'
 
