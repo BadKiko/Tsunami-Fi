@@ -49,6 +49,6 @@ Tsunami-Fi является простым инструментом, котор�
 - Brute force админ панели
 - Handshake расшифровка
 
-## 🌱 Contacts 🌱
+## 🌱 Контакты 🌱
 
 E-Mail разработчика <kiko.games@gmail.com>
