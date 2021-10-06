@@ -5,15 +5,16 @@ Tsunami-Fi is simple multi-tool bash application for Wi-Fi WPS PixieDust and Nul
 
 ## 🌴 Used Instruments 🌴
 ### Wi-Fi WPS
-- OneShot
-- WiFite
+- OneShot ([GitHub](https://github.com/drygdryg/OneShot))
+- WiFite ([GitHub](https://github.com/derv82/wifite2))
 
 ### Wi-Fi WPA
-- WiFite
+- WiFite ([GitHub](https://github.com/derv82/wifite2))
+
 
 ### MITM 
-- Ettercap Graphical
-- Burpsuite Graphical
+- Ettercap Graphical  ([GitHub](https://github.com/Ettercap/ettercap))
+- Burpsuite Graphical ([Site](https://portswigger.net/burp))
 
 ## 🍀 Screenshots 🍀
 ![intro](https://raw.githubusercontent.com/BadKiko/Tsunami-Fi/main/PreviewImages/Screenshot_20211006_120323.png)
