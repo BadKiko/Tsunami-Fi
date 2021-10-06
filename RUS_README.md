@@ -1,9 +1,9 @@
-# 🌌 Tsunami-Fi 🌌
+# 🪴 Tsunami-Fi 🪴
 > [English version README](https://github.com/BadKiko/Tsunami-Fi/blob/main/README.md )
-## 🪐Описание🪐
+## 🌿 Описание 🌿
 Tsunami-Fi является простым инструментом, который собрал в себе множество других инструментов, Tsu-Fi может: Wi-Fi WPS PixieDust и NullPIN аттаки, Wi-Fi Handshake атака, помощь с MITM атаками
 
-## ☄️Инструменты☄️
+## 🌴 Инструменты 🌴
 ### Wi-Fi WPS
 - OneShot
 - WiFite
@@ -15,9 +15,16 @@ Tsunami-Fi является простым инструментом, котор�
 - Ettercap Graphical
 - Burpsuite Graphical
 
-## ✨ Скриншоты✨
+## 🍀 Скриншоты🍀
+![intro](https://raw.githubusercontent.com/BadKiko/Tsunami-Fi/main/IMG_20211006_081443_235.png)
+---
+![choose](https://raw.githubusercontent.com/BadKiko/Tsunami-Fi/main/IMG_20211006_081445_022.png)
+---
+![menu](https://raw.githubusercontent.com/BadKiko/Tsunami-Fi/main/IMG_20211006_081445_445.png)
+---
 
-## 💫Будет сделано💫
+
+## 🌵Будет сделано🌵
 ### Настройки
 - Отключение авто настройки размера окна
 - Пропуск заставки
@@ -42,6 +49,6 @@ Tsunami-Fi является простым инструментом, котор�
 - Brute force админ панели
 - Handshake расшифровка
 
-## 🌙 Contacts 🌕
+## 🌱 Contacts 🌱
 
 E-Mail разработчика <kiko.games@gmail.com>
