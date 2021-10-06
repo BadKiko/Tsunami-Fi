@@ -295,10 +295,13 @@ echo -e  "\x1b[1;33m3)\x1b[1;32m Удалить определенные пра�
 printf "\x1b[1;32m\nTSU-FI> \x1b[1;33m"
 read redirectchoose
 case $redirectchoose in
+# _____ Exit _____
 0)
 break
+# _______________
 ;;
-1) #HTTP REDIRECT
+#__________ Http redirect __________
+1)
 while true
 do
 clear
@@ -311,6 +314,7 @@ echo -e  "\x1b[1;33m* \x1b[1;32m Укажите порт на который б�
 printf "\x1b[1;32m\nTSU-FI> \x1b[1;33m"
 read httpnewport
 case $httpnewport in
+#___________________________________
 0)
 break
 ;;
@@ -321,10 +325,13 @@ break
 esac
 done
 ;;
-2)#DELETE ALL
+#__________ Удалить все правила redirect'a __________
+2)
 clear
 sudo iptables -t nat -F
 ;;
+#______________________________________________________
+#__________ Удалить конкретные правила redirect'a __________
 3)
 while true
 do
@@ -351,20 +358,24 @@ iptables -t nat -D PREROUTING $deleterule
 break
 esac
 done
+#___________________________________________________
 esac
 done
 ;;
-
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+# ~~~~~~~~~~Запуск Ettercap Graphical~~~~~~~~~~
 6)
 ettercap -G &
 sleep 0.1
 ;;
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~Запуск BurpSuite~~~~~~~~~~
 7)
 burpsuite &
 sleep 0.1
 ;;
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~Настройка отключения NM~~~~~~~~~~
 8)
 if [[ $autoffnm == "1" ]]; then
 autoffnm="0"
@@ -375,6 +386,7 @@ fi
 9)
 clear
 printf '\e[8;33;130t'
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # ----------Остановка NetworkManager----------
 networkmanstop
 
