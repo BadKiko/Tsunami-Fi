@@ -50,6 +50,7 @@ idname=(null)
 nets=0
 for iface in $(ls /sys/class/net/)
 do
+
 idname+=($iface)
 let "nets+=1"
 echo -e "\x1b[1;33m$nets) $iface"
@@ -75,7 +76,44 @@ wificard=${idname[$adapchoose]}
 
 autoffnm="1"
 
-#Вывод в консоль информации
+#------------------------------------------FUNCTIONS------------------------------------------
+
+networkmanstop(){
+if [[ $autoffnm == "1" ]]; then
+echo -e "\x1b[1;33mОтключаем NetworkManager"
+systemctl stop NetworkManager
+systemctl stop wpa_supplicant
+echo -e "\x1b[1;33mУбиваем мешающие сервисы"
+airmon-ng check kill
+
+sleep 0.5
+fi
+}
+
+networkmanstart(){
+if [[ $autoffnm == "1" ]]; then
+systemctl start NetworkManager
+systemctl start wpa_supplicant
+fi
+}
+
+gotomonitormode(){
+echo -e "\x1b[1;33m---Отключаем процессы которые могут помешать интерфейсу---"
+airmon-ng check kill
+echo -e "\x1b[1;33m---Переводим интерфейс в режим монитора---"
+ifconfig $wificard down && iwconfig $wificard mode monitor && ifconfig $wificard up
+sleep 1
+}
+
+gotomanagedmode(){
+echo -e "\x1b[1;33m---Переводим интерфейс в управляемый режим---"
+ifconfig $wificard down && iwconfig $wificard mode managed && ifconfig $wificard up
+sleep 1
+}
+
+#---------------------------------------------------------------------------------------------
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ГЛАВНОЕ МЕНЮ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 while true
 do
 clear
@@ -131,19 +169,21 @@ echo -e  "\x1b[1;33m10)\x1b[1;32m Запуск WPS-Only WiFite\x1b[0m"
 
 printf "\x1b[1;32m\nTSU-FI> \x1b[1;33m"
 read choose
-
-
-#CASE
+}
 case $choose in
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+# ~~~~~~~~~~Выход из скрипта~~~~~~~~~~
 0)
 clear
 echo -e "\x1b[1;33m---Выходим---"
 exit 0
 ;;
-1) # Выбрать другой интерфейс
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-
+# ~~~~~~~~~~Выбрать адаптер~~~~~~~~~~
+1)
 while true
 do
 clear
@@ -161,41 +201,42 @@ done
 let "nets+=1"
 printf "\n\x1b[1;32m$nets) Выйти\n\n\x1b[1;32mTSU-FI> \x1b[1;33m"
 read adapchoose
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-
+# ~~~~~~~~~~Если введен несуществующий адаптер~~~~~~~~~~
 if (( "$adapchoose" <= "$nets" )); then
 case $adapchoose in
 $nets)
 exit 0
 ;;
-*) #если введено с клавиатуры то, что в case не описывается, выполнять следующее:
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# ~~~~~~~~~~Если введено не число~~~~~~~~~~
+*)
 break
-esac #окончание оператора case.
+esac
 fi
 done
-
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 wificard=${idname[$adapchoose]}
 clear
 ;;
-2)#Monitor or managed mode
+
+# ~~~~~~~~~~Перевод адаптера в управляемый режим или режим монитора~~~~~~~~~~
+2)
 if [[ $wifimode == "Monitor" ]]; then
 clear
-echo -e "\x1b[1;33m---Переводим интерфейс в управляемый режим---"
-ifconfig $wificard down && iwconfig $wificard mode managed && ifconfig $wificard up
-systemctl start NetworkManager
-sleep 1
+gotomanagedmode
 fi
 if [[ $wifimode == "Managed" ]]; then
 clear
-echo -e "\x1b[1;33m---Переводим интерфейс в режим монитора---"
-ifconfig $wificard down && iwconfig $wificard mode monitor && ifconfig $wificard up
-echo -e "\x1b[1;33m---Отключаем процессы которые могут помешать интерфейсу---"
-airmon-ng check kill
-sleep 1
+gotomanagedmode
 fi
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ;;
-3)#Take inet
+
+# ~~~~~~~~~~Выбор сетей~~~~~~~~~~
+3)
 clear
 printf '\e[8;33;110t'
 sudo iw dev $wificard scan | awk '
@@ -211,9 +252,12 @@ sudo iw dev $wificard scan | awk '
     /Device name:/{printf "\t\t"$4$5}';
 echo
 read chwifinumer
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ;;
-4)#Ip-Forwarding
+
+# ~~~~~~~~~~Ip-Forwarding~~~~~~~~~~
+4)
 if [[ "$(sysctl net.ipv4.ip_forward)" == "net.ipv4.ip_forward = 0" ]]; then
 sysctl -w net.ipv4.ip_forward=1
 continue
@@ -222,7 +266,11 @@ if [[ "$(sysctl net.ipv4.ip_forward)" == "net.ipv4.ip_forward = 1" ]]; then
 sysctl -w net.ipv4.ip_forward=0
 continue
 fi
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 ;;
+
+# ~~~~~~~~~~Redirect портов~~~~~~~~~~
 5)
 while true
 do
@@ -306,6 +354,9 @@ done
 esac
 done
 ;;
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 6)
 ettercap -G &
 sleep 0.1
@@ -324,19 +375,12 @@ fi
 9)
 clear
 printf '\e[8;33;130t'
-
-if [[ $autoffnm == "1" ]]; then
-echo -e "\x1b[1;33mОтключаем NetworkManager"
-systemctl stop NetworkManager
-systemctl stop wpa_supplicant
-echo -e "\x1b[1;33mУбиваем мешающие сервисы"
-airmon-ng check kill
-
-sleep 0.5
-fi
+# ----------Остановка NetworkManager----------
+networkmanstop
 
 clear
 touch OneShot/tmp_log.txt
+# ----------Запускаем OneShot----------
 python3 -u OneShot/oneshot.py -i $wificard | tee OneShot/tmp_log.txt
 clear
 
@@ -345,35 +389,24 @@ echo -e "\x1b[1;33mНажмите [Enter] чтобы вернуться в ме�
 rm OneShot/tmp_log.txt
 read
 clear
-if [[ $autoffnm == "1" ]]; then
-systemctl start NetworkManager
-systemctl start wpa_supplicant
-fi
+# ----------Запускаем NetworkManager----------
+networkmanstart
+
 ;;
 10)
 clear
 printf '\e[8;33;130t'
-
-if [[ $autoffnm == "1" ]]; then
-echo -e "\x1b[1;33mОтключаем NetworkManager"
-systemctl stop NetworkManager
-systemctl stop wpa_supplicant
-echo -e "\x1b[1;33mУбиваем мешающие сервисы"
-airmon-ng check kill
-
-sleep 0.5
-fi
+# ----------Остановка NetworkManager----------
+networkmanstop
 
 clear
+# ----------Запускаем Wifite----------
 wifite --wps-only -i $wificard
-
 echo -e "\x1b[1;33mНажмите [Enter] чтобы вернуться в меню"
-
 read
 clear
-if [[ $autoffnm == "1" ]]; then
-systemctl start NetworkManager
-systemctl start wpa_supplicant
-fi
+# ----------Запускаем NetworkManager----------
+networkmanstart
+
 esac
 done
