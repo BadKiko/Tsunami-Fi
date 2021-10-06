@@ -16,13 +16,12 @@ Tsunami-Fi является простым инструментом, котор�
 - Burpsuite Graphical
 
 ## 🍀 Скриншоты🍀
-![intro](https://raw.githubusercontent.com/BadKiko/Tsunami-Fi/main/IMG_20211006_081443_235.png)
+![intro](https://raw.githubusercontent.com/BadKiko/Tsunami-Fi/main/PreviewImages/Screenshot_20211006_120323.png)
 ---
-![choose](https://raw.githubusercontent.com/BadKiko/Tsunami-Fi/main/IMG_20211006_081445_022.png)
+![choose](https://raw.githubusercontent.com/BadKiko/Tsunami-Fi/main/PreviewImages/Screenshot_20211006_120330.png)
 ---
-![menu](https://raw.githubusercontent.com/BadKiko/Tsunami-Fi/main/IMG_20211006_081445_445.png)
+![menu](https://raw.githubusercontent.com/BadKiko/Tsunami-Fi/main/PreviewImages/Screenshot_20211006_120338.png)
 ---
-
 
 ## 🌵Будет сделано🌵
 ### Настройки

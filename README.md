@@ -16,11 +16,11 @@ Tsunami-Fi is simple multi-tool bash application for Wi-Fi WPS PixieDust and Nul
 - Burpsuite Graphical
 
 ## 🍀 Screenshots 🍀
-![intro](https://raw.githubusercontent.com/BadKiko/Tsunami-Fi/main/IMG_20211006_081443_235.png)
+![intro](https://raw.githubusercontent.com/BadKiko/Tsunami-Fi/main/PreviewImages/Screenshot_20211006_120323.png)
 ---
-![choose](https://raw.githubusercontent.com/BadKiko/Tsunami-Fi/main/IMG_20211006_081445_022.png)
+![choose](https://raw.githubusercontent.com/BadKiko/Tsunami-Fi/main/PreviewImages/Screenshot_20211006_120330.png)
 ---
-![menu](https://raw.githubusercontent.com/BadKiko/Tsunami-Fi/main/IMG_20211006_081445_445.png)
+![menu](https://raw.githubusercontent.com/BadKiko/Tsunami-Fi/main/PreviewImages/Screenshot_20211006_120338.png)
 ---
 
 ## 🌵 To Do 🌵
