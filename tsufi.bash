@@ -40,6 +40,17 @@ printf "\x1b[1;33m\n\nПерезапустите скрипт с правами 
 exit 0
 fi
 
+checkandinstallpackage()
+{
+if [[ command -v $1 == "" ]]
+pacman -S $1 && apt install $1
+else 
+echo -e  "\x1b[1;33m1)\x1b[1;32m $1 уже установен!\x1b[0m"
+fi
+}
+
+checkandinstallpackage "lolcat"
+
 while true
 do
 clear
@@ -419,6 +430,10 @@ read
 clear
 # ----------Запускаем NetworkManager----------
 networkmanstart
+;;
+
+#
+11)
 
 esac
 done
