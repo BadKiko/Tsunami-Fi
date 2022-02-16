@@ -1,0 +1,130 @@
+[
+  {
+    "id" : "1",
+    "file" : [
+      {
+        "locale" : "ru",
+        "link" : "https://firebasestorage.googleapis.com/v0/b/animecoloring-d46ad.appspot.com/o/stickers%2Ftext%2Fru%2FGroup%2048%20(1).png?alt=media&token=9d450cac-557e-4440-a772-5cae2902f672"
+      },
+      {
+        "locale" : "en",
+        "link" : "https://firebasestorage.googleapis.com/v0/b/animecoloring-d46ad.appspot.com/o/stickers%2Ftext%2Fen%2FGroup%2048%20(3).png?alt=media&token=e0c673c6-eeb9-44c5-b073-1ba37c8ed8a8"
+      }
+    ],
+    "version" : 2,
+    "cost" : 200,
+    "enable" : true
+  },
+  {
+    "id" : "2",
+    "file" : [
+      {
+        "locale" : "ru",
+        "link" : "https://firebasestorage.googleapis.com/v0/b/animecoloring-d46ad.appspot.com/o/stickers%2Ftext%2Fru%2FGroup%2048.png?alt=media&token=a2eb4b6c-9386-4aa0-b48c-cddb3c647cfe"
+      },
+      {
+        "locale" : "en",
+        "link" : "https://firebasestorage.googleapis.com/v0/b/animecoloring-d46ad.appspot.com/o/stickers%2Ftext%2Fen%2FGroup%2048%20(2).png?alt=media&token=f7bc660d-bf8d-4f73-a927-486267adb7d0"
+      }
+    ],
+    "version" : 1,
+    "cost" : 300,
+    "enable" : true
+  },
+  {
+    "id" : "3",
+    "file" : [
+      {
+        "locale" : "ru",
+        "link" : "https://firebasestorage.googleapis.com/v0/b/animecoloring-d46ad.appspot.com/o/stickers%2Ftext%2Fru%2FGroup%2049%20(1).png?alt=media&token=b24b11d1-1ce6-4fe6-bbce-8c7682cb3c20"
+      },
+      {
+        "locale" : "en",
+        "link" : "https://firebasestorage.googleapis.com/v0/b/animecoloring-d46ad.appspot.com/o/stickers%2Ftext%2Fen%2FGroup%2049%20(3).png?alt=media&token=29fa89e5-5212-489e-a6b3-f16098c8f5b4"
+      }
+    ],
+    "version" : 1,
+    "cost" : 0,
+    "enable" : true
+  },
+  {
+    "id" : "4",
+    "file" : [
+      {
+        "locale" : "ru",
+        "link" : "https://firebasestorage.googleapis.com/v0/b/animecoloring-d46ad.appspot.com/o/stickers%2Ftext%2Fru%2FGroup%2049.png?alt=media&token=431ebb57-0ac3-445c-9334-a14f0c707888"
+      },
+      {
+        "locale" : "en",
+        "link" : "https://firebasestorage.googleapis.com/v0/b/animecoloring-d46ad.appspot.com/o/stickers%2Ftext%2Fen%2FGroup%2049%20(2).png?alt=media&token=9ef70cb4-f266-48e7-88cb-975ade7db353"
+      }
+    ],
+    "version" : 1,
+    "cost" : 700,
+    "enable" : true
+  },
+  {
+    "id" : "5",
+    "file" : [
+      {
+        "locale" : "ru",
+        "link" : "https://firebasestorage.googleapis.com/v0/b/animecoloring-d46ad.appspot.com/o/stickers%2Ftext%2Fru%2FGroup%2050.png?alt=media&token=72f573e8-7823-4a02-a826-6ffc4d70c439"
+      },
+      {
+        "locale" : "en",
+        "link" : "https://firebasestorage.googleapis.com/v0/b/animecoloring-d46ad.appspot.com/o/stickers%2Ftext%2Fen%2FGroup%2050%20(1).png?alt=media&token=d0e04e59-8778-4608-a46d-21bcda215faf"
+      }
+    ],
+    "version" : 1,
+    "cost" : 500,
+    "enable" : true
+  },
+  {
+    "id" : "6",
+    "file" : [
+      {
+        "locale" : "ru",
+        "link" : "https://firebasestorage.googleapis.com/v0/b/animecoloring-d46ad.appspot.com/o/stickers%2Ftext%2Fru%2FGroup%2051%20(1).png?alt=media&token=8afd4fa3-7f55-413d-b12e-f2f2e83385ee"
+      },
+      {
+        "locale" : "en",
+        "link" : "https://firebasestorage.googleapis.com/v0/b/animecoloring-d46ad.appspot.com/o/stickers%2Ftext%2Fen%2FGroup%2051%20(4).png?alt=media&token=488f901f-a9e1-4c59-b2d2-3349307c127f"
+      }
+    ],
+    "version" : 1,
+    "cost" : 50,
+    "enable" : true
+  },
+  {
+    "id" : "7",
+    "file" : [
+      {
+        "locale" : "ru",
+        "link" : "https://firebasestorage.googleapis.com/v0/b/animecoloring-d46ad.appspot.com/o/stickers%2Ftext%2Fru%2FGroup%2051%20(2).png?alt=media&token=70375c44-fa08-4cf8-a359-677d4c726875"
+      },
+      {
+        "locale" : "en",
+        "link" : "https://firebasestorage.googleapis.com/v0/b/animecoloring-d46ad.appspot.com/o/stickers%2Ftext%2Fen%2FGroup%2051%20(5).png?alt=media&token=1308d6bd-96bd-4b96-abb4-0472a275242b"
+      }
+    ],
+    "version" : 1,
+    "cost" : 0,
+    "enable" : true
+  },
+  {
+    "id" : "8",
+    "file" : [
+      {
+        "locale" : "ru",
+        "link" : "https://firebasestorage.googleapis.com/v0/b/animecoloring-d46ad.appspot.com/o/stickers%2Ftext%2Fru%2FGroup%2051.png?alt=media&token=1dd2bc3a-bc50-4d51-9a80-897e0ab36d9a"
+      },
+      {
+        "locale" : "en",
+        "link" : "https://firebasestorage.googleapis.com/v0/b/animecoloring-d46ad.appspot.com/o/stickers%2Ftext%2Fen%2FGroup%2051%20(3).png?alt=media&token=f9f57ed1-920e-4c89-8305-9ab1b6929653"
+      }
+    ],
+    "version" : 1,
+    "cost" : 0,
+    "enable" : true
+  }
+]
