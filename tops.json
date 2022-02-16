@@ -1,6 +1,6 @@
 [{
     "id": "main_character",
-    "names": "Главный герой",
+    "name": "Главный герой",
     "coloring_ids": [
       "3"
     ],
@@ -8,7 +8,7 @@
   },
   {
     "id": "romantic",
-    "names": "Романтика",
+    "name": "Романтика",
     "coloring_ids": [
       "2", "3"
     ],
@@ -16,7 +16,7 @@
   },
   {
     "id": "friends",
-    "names": "Дружба",
+    "name": "Дружба",
     "coloring_ids": [
       "1", "2", "3", "4"
     ],
