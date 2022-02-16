@@ -1,0 +1,25 @@
+[{
+    "id": "main_character",
+    "names": "Главный герой",
+    "coloring_ids": [
+      "3"
+    ],
+    "enable": true
+  },
+  {
+    "id": "romantic",
+    "names": "Романтика",
+    "coloring_ids": [
+      "2", "3"
+    ],
+    "enable": true
+  },
+  {
+    "id": "friends",
+    "names": "Дружба",
+    "coloring_ids": [
+      "1", "2", "3", "4"
+    ],
+    "enable": true
+  }
+]
