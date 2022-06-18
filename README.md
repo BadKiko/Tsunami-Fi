@@ -1,5 +1,9 @@
 # 🪴 Tsunami-Fi 🪴
 > [Русская версия README](https://github.com/BadKiko/Tsunami-Fi/blob/main/RUS_README.md )
+
+## 🧊 The project was frozen 🧊
+I haven't been working on this repository for a long time, if someone is too lazy to spend their time on this tool, then throw your pull request and describe what was added by you
+
 ## 🌿Description 🌿
 Tsunami-Fi is simple multi-tool bash application for Wi-Fi WPS PixieDust and NullPIN attack, Wi-Fi Handshake attack, help with MITM attacks
 
